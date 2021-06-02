@@ -23,7 +23,7 @@ RUN apk update && \
     cd ../.. && \
     sed -i 's/__off64_t/off64_t/g' ../fastahack/LargeFileSupport.h && \
     CXXFLAGS=-isystem\ tabixpp cmake -DHTSLIB_LOCAL:STRING=./tabixpp/htslib/ .. && \
-    cmake --build . && \
+    cmake --build . || true && \
     cmake --install . && \
     cd ../.. && \
     git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.5 && \
