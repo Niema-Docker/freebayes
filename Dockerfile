@@ -13,7 +13,9 @@ RUN apk update && \
     sed -i 's/-lbz2/-lbz2 -lcurl/g' Makefile && \
     make && \
     gcc tabix.o -shared -o libtabixpp.so && \
+    mkdir -p /usr/local/lib && \
     install -p -m 644 libtabixpp.so /usr/local/lib/ && \
+    mkdir -p /usr/local/include && \
     install -p -m 644 tabix.hpp /usr/local/include/ && \
     cd htslib && \
     make && \
