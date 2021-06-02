@@ -5,10 +5,10 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # install freebayes
 RUN apk update && \
     apk add bash bzip2-dev cmake curl-dev g++ git libexecinfo-dev make meson perl-utils pkgconfig xz-dev zlib-dev && \
-    git clone --recursive https://github.com/vcflib/vcflib.git && \
+    git clone --recursive https://github.com/vcflib/vcflib.git --branch v1.0.2 && \
     mkdir -p vcflib/build && \
     cd vcflib/build && \
-    git clone --recursive https://github.com/ekg/tabixpp.git && \
+    git clone --recursive https://github.com/ekg/tabixpp.git --branch v1.1.0 && \
     cd tabixpp && \
     sed -i 's/-lbz2/-lbz2 -lcurl/g' Makefile && \
     make && \
@@ -26,7 +26,7 @@ RUN apk update && \
     cmake --build . && \
     cmake --install . && \
     cd ../.. && \
-    git clone --recursive https://github.com/freebayes/freebayes.git
+    git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.5 && \
     cd freebayes && \
     sed -i 7,17d src/SegfaultHandler.cpp && \
     sed -i 's/__off64_t/off64_t/g' src/LargeFileSupport.h && \
