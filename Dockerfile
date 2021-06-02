@@ -22,7 +22,8 @@ RUN apk update && \
     make install && \
     cd ../.. && \
     sed -i 's/__off64_t/off64_t/g' ../fastahack/LargeFileSupport.h && \
-    CXXFLAGS=-isystem\ tabixpp cmake -DHTSLIB_LOCAL:STRING=./tabixpp/htslib/ .. || true && \
+    #CXXFLAGS=-isystem\ tabixpp cmake -DHTSLIB_LOCAL:STRING=./tabixpp/htslib/ .. || true && \
+    cmake .. && \
     cmake --build . && \
     cmake --install . && \
     cd ../.. && \
