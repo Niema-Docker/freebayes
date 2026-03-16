@@ -29,8 +29,7 @@ RUN apk update && \
     git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.10 && \
     cd freebayes && \
     sed -i 7,17d src/SegfaultHandler.cpp && \
-    sed -i 's/__off64_t/off64_t/g' src/LargeFileSupport.h && \
-    sed -i 's/__off64_t/off64_t/g' vcflib/fastahack/LargeFileSupport.h && \
+    find . -type f -name "*.h" -exec sed -i 's/__off64_t/off64_t/g' {} + && \
     meson build && \
     cd build && \
     ninja && \
