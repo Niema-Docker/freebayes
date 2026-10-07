@@ -23,6 +23,8 @@ RUN apk update && \
     cmake -DZIG=OFF -DWFA_GITMODULE=ON .. && \
     cmake --build . && \
     cmake --install . && \
+    mkdir -p /usr/local/include/intervaltree && \
+    ln -s /usr/local/include/vcflib/IntervalTree.h /usr/local/include/intervaltree/IntervalTree.h && \
     cd ../.. && \
     git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.10 && \
     cd freebayes && \
