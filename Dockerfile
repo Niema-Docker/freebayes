@@ -19,12 +19,15 @@ RUN apk update && \
     make && \
     make install && \
     cd ../.. && \
+    sed -i 's/__off64_t/off64_t/g' ../fastahack/LargeFileSupport.h && \
     cmake -DWFA_GITMODULE=ON .. && \
     cmake --build . && \
     cmake --install . && \
     cd ../.. && \
     git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.10 && \
     cd freebayes && \
+    sed -i 7,17d src/SegfaultHandler.cpp && \
+    find . -type f -name "*.h" -exec sed -i 's/__off64_t/off64_t/g' {} + && \
     meson build && \
     cd build && \
     ninja && \
