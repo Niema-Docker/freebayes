@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # install freebayes
 RUN apk update && \
-    apk add --no-cache bash bzip2-dev cmake curl-dev g++ git make meson perl-utils pkgconfig xz-dev zlib-dev && \
+    apk add --no-cache bash bzip2-dev cmake curl-dev g++ git make meson perl-utils pkgconfig py3-pybind11-dev xz-dev zig zlib-dev && \
     git clone --recursive https://github.com/vcflib/vcflib.git --branch v1.0.15 && \
     mkdir -p vcflib/build && \
     cd vcflib/build && \
