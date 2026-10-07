@@ -1,11 +1,10 @@
-# Minimal Docker image for freebayes v1.3.5 using Alpine base
-FROM alpine:3.13.5
-MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
+# Minimal Docker image for freebayes using Alpine base
+FROM alpine:latest
 
 # install freebayes
 RUN apk update && \
-    apk add bash bzip2-dev cmake curl-dev g++ git libexecinfo-dev make meson perl-utils pkgconfig xz-dev zlib-dev && \
-    git clone --recursive https://github.com/vcflib/vcflib.git --branch v1.0.14 && \
+    apk add --no-cache bash bzip2-dev cmake curl-dev g++ git libexecinfo-dev make meson perl-utils pkgconfig xz-dev zlib-dev && \
+    git clone --recursive https://github.com/vcflib/vcflib.git --branch v1.0.15 && \
     mkdir -p vcflib/build && \
     cd vcflib/build && \
     git clone --recursive https://github.com/ekg/tabixpp.git --branch v1.1.2 && \
