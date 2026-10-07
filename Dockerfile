@@ -19,7 +19,7 @@ RUN apk update && \
     make && \
     make install && \
     cd ../.. && \
-    sed -i 's/__off64_t/off64_t/g' ../fastahack/LargeFileSupport.h && \
+    sed -i 's/__off64_t/off64_t/g' contrib/fastahack/LargeFileSupport.h && \
     cmake -DWFA_GITMODULE=ON .. && \
     cmake --build . && \
     cmake --install . && \
