@@ -19,7 +19,7 @@ RUN apk update && \
     make && \
     make install && \
     cd ../.. && \
-    cmake .. && \
+    cmake -DWFA_GITMODULE=ON .. && \
     cmake --build . && \
     cmake --install . && \
     cd ../.. && \
