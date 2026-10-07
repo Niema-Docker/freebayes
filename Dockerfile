@@ -28,7 +28,7 @@ RUN apk update && \
     cd freebayes && \
     sed -i 7,17d src/SegfaultHandler.cpp && \
     find . -type f -name "*.h" -exec sed -i 's/__off64_t/off_t/g' {} + && \
-    meson build && \
+    meson setup build -Dprefer_system_deps=false && \
     cd build && \
     ninja && \
     mv bamleftalign freebayes /usr/local/bin/ && \
