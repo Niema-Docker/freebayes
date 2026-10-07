@@ -3,35 +3,6 @@ FROM alpine:latest
 
 # install freebayes
 RUN apk update && \
-    apk add --no-cache bash bzip2-dev cmake curl-dev g++ git libexecinfo-dev make meson perl-utils pkgconfig py3-pybind11-dev python3-dev xz-dev zlib-dev && \
-    git clone --recursive https://github.com/vcflib/vcflib.git --branch v1.0.15 && \
-    mkdir -p vcflib/build && \
-    cd vcflib/build && \
-    git clone --recursive https://github.com/ekg/tabixpp.git --branch v1.1.2 && \
-    cd tabixpp && \
-    make && \
-    gcc tabix.o -shared -o libtabixpp.so && \
-    mkdir -p /usr/local/lib && \
-    install -p -m 644 libtabixpp.so /usr/local/lib/ && \
-    mkdir -p /usr/local/include && \
-    install -p -m 644 tabix.hpp /usr/local/include/ && \
-    cd htslib && \
-    make && \
-    make install && \
-    cd ../.. && \
-    sed -i 's/__off64_t/off_t/g' ../contrib/fastahack/LargeFileSupport.h && \
-    cmake -DZIG=OFF -DWFA_GITMODULE=ON .. && \
-    cmake --build . && \
-    cmake --install . && \
-    mkdir -p /usr/local/include/intervaltree && \
-    ln -s /usr/local/include/vcflib/IntervalTree.h /usr/local/include/intervaltree/IntervalTree.h && \
-    cd ../.. && \
-    git clone --recursive https://github.com/freebayes/freebayes.git --branch v1.3.10 && \
-    cd freebayes && \
-    find . -type f -name "*.h" -exec sed -i 's/__off64_t/off_t/g' {} + && \
-    CXXFLAGS="-I../contrib" meson setup build -Dprefer_system_deps=false && \
-    cd build && \
-    ninja && \
-    mv bamleftalign freebayes /usr/local/bin/ && \
-    cd ../.. && \
-    rm -rf freebayes vcflib
+    apk add --no-cache bash wget && \
+    wget -qO- "https://github.com/freebayes/freebayes/releases/download/v1.3.10/freebayes-1.3.10-linux-amd64-static.gz" | gunzip > /usr/local/bin/freebayes && \
+    chmod a+x /usr/local/bin/freebayes
